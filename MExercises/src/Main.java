@@ -5,6 +5,7 @@ public class Main {
         Set home = new Set();
         home.setConnection("root", "246810987");
        // home.getNames();
-        home.getMinionNames();
+        //home.getMinionNames();
+        home.changeTownNames();
     }
 }

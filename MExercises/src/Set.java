@@ -77,4 +77,21 @@ public class Set {
 
         return resultSet.next() ? resultSet.getString("name") : null;
     }
+
+    public void changeTownNames() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        String countryName = scanner.nextLine();
+
+        String query = "UPDATE towns SET name = UPPER(name) WHERE country = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, countryName);
+
+        int townsAffected = statement.executeUpdate();
+        if (townsAffected == 0){
+            System.out.println("No town names were affected.");
+        }else {
+            System.out.printf("%d town names were affected.%n", townsAffected);
+        }
+
+    }
 }
