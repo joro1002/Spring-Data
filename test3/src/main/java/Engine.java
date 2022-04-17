@@ -26,10 +26,10 @@ public class Engine implements Runnable{
         //employeesFromDepartment();
        // addressesWithEmployeeCount();
        // getEmployeeWithProject();
-       // findLatest10Projects();
+        findLatest10Projects();
        // increaseSalaries();
-       // findEmployeesByFirstName();
-        employeesMaximumSalaries();
+        //findEmployeesByFirstName();
+       // employeesMaximumSalaries();
     }
 
     private void employeesMaximumSalaries() {
