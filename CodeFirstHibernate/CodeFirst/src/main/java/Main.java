@@ -4,7 +4,7 @@ import javax.persistence.Persistence;
 
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("wizard_deposits");
         EntityManager entityManager = emf.createEntityManager();
         Engine engine = new Engine(entityManager);
         engine.run();
