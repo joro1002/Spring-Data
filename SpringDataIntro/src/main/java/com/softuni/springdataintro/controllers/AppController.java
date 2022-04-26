@@ -1,20 +1,23 @@
 package com.softuni.springdataintro.controllers;
 
-import com.softuni.springdataintro.constants.GlobalConstants;
-import com.softuni.springdataintro.utils.FileUtil;
+import com.softuni.springdataintro.services.AuthorService;
+import com.softuni.springdataintro.services.CategoryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class AppController implements CommandLineRunner {
-    private final FileUtil fileUtil;
+    private final CategoryService categoryService;
+    private final AuthorService authorService;
 
-    public AppController(FileUtil fileUtil) {
-        this.fileUtil = fileUtil;
+    public AppController(CategoryService categoryService, AuthorService authorService) {
+        this.categoryService = categoryService;
+        this.authorService = authorService;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        String[] fileContent = this.fileUtil.readFileContent(GlobalConstants.CATEGORIES_FILE_PATH);
+        this.categoryService.seedCategories();
+        this.authorService.seedAuthor();
     }
 }
