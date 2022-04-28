@@ -36,4 +36,14 @@ public class AuthorServiceImpl implements AuthorService {
                     this.authorRepository.saveAndFlush(author);
                 });
     }
+
+    @Override
+    public int getAllAuthorsCount() {
+        return (int) this.authorRepository.count();
+    }
+
+    @Override
+    public Author findAuthorById(Long id) {
+        return this.authorRepository.getOne(id);
+    }
 }
