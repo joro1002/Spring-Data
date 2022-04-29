@@ -1,10 +1,13 @@
 package com.softuni.springdataintro.controllers;
 
+import com.softuni.springdataintro.entities.Book;
 import com.softuni.springdataintro.services.AuthorService;
 import com.softuni.springdataintro.services.BookService;
 import com.softuni.springdataintro.services.CategoryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 @Controller
 public class AppController implements CommandLineRunner {
@@ -23,5 +26,8 @@ public class AppController implements CommandLineRunner {
         this.categoryService.seedCategories();
         this.authorService.seedAuthor();
         this.bookService.seedBook();
+
+        List<Book> books = this.bookService.getAllBooksAfter2000();
+        System.out.println();
     }
 }
