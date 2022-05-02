@@ -10,4 +10,8 @@ public interface AuthorService {
     int getAllAuthorsCount();
 
     Author findAuthorById(long randomId);
+
+    void printAllAuthorsFirstNameEndsWithGivenString(String word);
+
+    void printAllAuthorsByBookCopies();
 }

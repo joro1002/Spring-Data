@@ -8,4 +8,12 @@ public interface BookService {
     void printAllBooksByEditionTypeAndCopiesLessThan500();
 
     void printAllBooksByPrice();
+
+    void printAllBookByRealiseDateNotInYear(String year);
+
+    void printAllBooksBeforeDate(String date);
+
+    void printAllBooksAuthorStartingWithGivenString(String word);
+
+    void printCountOfBooks(int length);
 }

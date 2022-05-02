@@ -90,6 +90,32 @@ public class BookServiceImpl implements BookService {
                 .forEach(b -> System.out.printf("%s - $%s%n", b.getTitle(), b.getPrice()));
     }
 
+    @Override
+    public void printAllBookByRealiseDateNotInYear(String year) {
+        this.bookRepository.findAllByReleaseDateNotInYear(year)
+                .forEach(b -> System.out.println(b.getTitle()));
+    }
+
+    @Override
+    public void printAllBooksBeforeDate(String date) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(date, dtf);
+
+        this.bookRepository.findAllByReleaseDateIsLessThan(localDate)
+                .forEach(b -> System.out.printf("%s %s %s%n", b.getTitle(), b.getEditionType(), b.getPrice()));
+    }
+
+    @Override
+    public void printAllBooksAuthorStartingWithGivenString(String word) {
+        this.bookRepository.findAllByAuthorLastNameStartingWith(word)
+                .forEach(b -> System.out.printf("%s (%s %s)%n", b.getTitle(), b.getAuthor().getFirstName(), b.getAuthor().getLastName()));
+    }
+
+    @Override
+    public void printCountOfBooks(int length) {
+        System.out.println(this.bookRepository.getAllBooksWithTitleIsLongerThanGivenNumber(length));
+    }
+
     private Set<Category> getRandomCategories() {
         Set<Category> result = new HashSet<>();
         Random random = new Random();

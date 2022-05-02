@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -33,6 +34,12 @@ public class Engine implements CommandLineRunner {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
        // this.bookService.printAllBooksByAgeRestriction(reader.readLine());
         //this.bookService.printAllBooksByEditionTypeAndCopiesLessThan500();
-        this.bookService.printAllBooksByPrice();
+        //this.bookService.printAllBooksByPrice();
+       // this.bookService.printAllBookByRealiseDateNotInYear(reader.readLine());
+       // this.bookService.printAllBooksBeforeDate(reader.readLine());
+        //this.authorService.printAllAuthorsFirstNameEndsWithGivenString(reader.readLine());
+       // this.bookService.printAllBooksAuthorStartingWithGivenString(reader.readLine());
+       // this.bookService.printCountOfBooks(Integer.parseInt(reader.readLine()));
+        this.authorService.printAllAuthorsByBookCopies();
     }
 }

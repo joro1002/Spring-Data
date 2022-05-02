@@ -2,11 +2,16 @@ package com.softuni.springintroex.services;
 
 import com.softuni.springintroex.constants.GlobalConstants;
 import com.softuni.springintroex.entities.Author;
+import com.softuni.springintroex.entities.Book;
 import com.softuni.springintroex.repositories.AuthorRepository;
 import com.softuni.springintroex.utils.FileUtil;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AuthorServiceImpl implements AuthorService{
@@ -40,5 +45,28 @@ public class AuthorServiceImpl implements AuthorService{
     @Override
     public Author findAuthorById(long randomId) {
         return this.authorRepository.getOne(randomId);
+    }
+
+    @Override
+    public void printAllAuthorsFirstNameEndsWithGivenString(String word) {
+        this.authorRepository.findAllByFirstNameEndingWith(word)
+                .forEach(a -> System.out.printf("%s %s%n", a.getFirstName(), a.getLastName()));
+    }
+
+    @Override
+    public void printAllAuthorsByBookCopies() {
+        List<Author> authors = this.authorRepository.findAll();
+        Map<String, Integer> authorCopies = new HashMap<>();
+
+        authors.forEach(author -> {
+            int copies = author.getBooks().stream().mapToInt(Book::getCopies).sum();
+            authorCopies.put(author.getFirstName() + " " + author.getLastName(), copies);
+        });
+
+        authorCopies
+                .entrySet()
+                .stream()
+                .sorted((current, next) -> Integer.compare(next.getValue(), current.getValue()))
+                .forEach(author -> System.out.printf("%s %d%n", author.getKey(), author.getValue()));
     }
 }

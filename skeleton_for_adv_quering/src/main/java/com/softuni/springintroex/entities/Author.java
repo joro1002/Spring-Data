@@ -37,7 +37,7 @@ public class Author extends BaseEntity {
         this.lastName = lastName;
     }
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     public Set<Book> getBooks() {
         return books;
     }
