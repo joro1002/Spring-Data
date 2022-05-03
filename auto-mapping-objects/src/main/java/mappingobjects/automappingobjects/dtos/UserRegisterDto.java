@@ -1,7 +1,14 @@
 package mappingobjects.automappingobjects.dtos;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Pattern;
+
 public class UserRegisterDto {
+    @Pattern(regexp = "\\w+@+.+", message = "Email incorrect")
     private String email;
+    @Length(min = 6, message = "Password length should be at least 6 symbols")
+    @Pattern(regexp = "[A-Z]+[a-z]+\\d+", message = "Password incorrect")
     private String password;
     private String confirmPassword;
     private String fullName;

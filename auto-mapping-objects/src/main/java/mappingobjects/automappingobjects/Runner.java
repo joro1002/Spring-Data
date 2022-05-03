@@ -27,7 +27,7 @@ public class Runner implements CommandLineRunner {
             case "RegisterUser":
                 UserRegisterDto user = new UserRegisterDto(tokens[1], tokens[2], tokens[3], tokens[4]);
 
-                this.userService.registerUser(user);
+                System.out.println(this.userService.registerUser(user));
 
                 break;
         }
