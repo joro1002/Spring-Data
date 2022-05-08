@@ -1,6 +1,7 @@
 package mappingobjects.automappingobjects;
 
 import mappingobjects.automappingobjects.dtos.AddGameDto;
+import mappingobjects.automappingobjects.dtos.DeleteGameDto;
 import mappingobjects.automappingobjects.dtos.LoginUserDto;
 import mappingobjects.automappingobjects.dtos.UserRegisterDto;
 import mappingobjects.automappingobjects.repositories.UserRepository;
@@ -54,6 +55,10 @@ public class Runner implements CommandLineRunner {
                     AddGameDto game = new AddGameDto(tokens[1], new BigDecimal(tokens[2]), Double.parseDouble(tokens[3]),
                             tokens[4], tokens[5], tokens[6], date);
                     System.out.println(this.gameService.addGame(game));
+                    break;
+                case "DeleteGame":
+                    DeleteGameDto deleteGameDto = new DeleteGameDto(Long.parseLong(tokens[1]));
+                    System.out.println(this.gameService.deleteGame(deleteGameDto));
                     break;
             }
         }
