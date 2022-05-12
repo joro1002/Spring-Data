@@ -1,7 +1,5 @@
 package softuni.jsonprocessing.entities;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -45,4 +43,5 @@ public class Suppliers extends BaseEntity{
     public void setParts(Set<Parts> parts) {
         this.parts = parts;
     }
+
 }

@@ -1,7 +1,5 @@
 package softuni.jsonprocessing.entities;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-
 import javax.persistence.*;
 import java.util.Set;
 
