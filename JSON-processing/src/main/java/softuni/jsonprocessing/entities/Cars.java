@@ -8,7 +8,7 @@ import java.util.Set;
 public class Cars extends BaseEntity{
     private String make;
     private String model;
-    private int travelledDistance;
+    private long travelledDistance;
     private Set<Parts> parts;
 
     public Cars(String make, String model, int travelledDistance) {
@@ -37,15 +37,18 @@ public class Cars extends BaseEntity{
     }
 
     @Column(name = "travelled_distance")
-    public int getTravelledDistance() {
+    public long getTravelledDistance() {
         return travelledDistance;
     }
 
-    public void setTravelledDistance(int travelledDistance) {
+    public void setTravelledDistance(long travelledDistance) {
         this.travelledDistance = travelledDistance;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "parts_cars",
+            joinColumns = {@JoinColumn(name = "car_id")},
+            inverseJoinColumns = {@JoinColumn(name = "part_id")})
     public Set<Parts> getParts() {
         return parts;
     }

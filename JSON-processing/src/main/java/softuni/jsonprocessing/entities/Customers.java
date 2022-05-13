@@ -5,17 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 public class Customers extends BaseEntity{
     private String name;
-    private LocalDate birthDate;
+    private LocalDateTime birthDate;
     private boolean isYoungDriver;
 
     private Set<Sales> sales;
-    public Customers(String name, LocalDate birthDate, boolean isYoungDriver) {
+    public Customers(String name, LocalDate birthDateTime, boolean isYoungDriver) {
         this.name = name;
         this.birthDate = birthDate;
         this.isYoungDriver = isYoungDriver;
@@ -33,12 +34,12 @@ public class Customers extends BaseEntity{
     }
 
     @Column(name = "birth_date")
-    public LocalDate getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 

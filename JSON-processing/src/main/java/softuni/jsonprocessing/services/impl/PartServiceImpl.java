@@ -3,6 +3,7 @@ package softuni.jsonprocessing.services.impl;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import softuni.jsonprocessing.dtos.PartSeedDto;
 import softuni.jsonprocessing.entities.Parts;
 import softuni.jsonprocessing.entities.Suppliers;
 import softuni.jsonprocessing.repositories.PartRepository;
@@ -32,14 +33,14 @@ public class PartServiceImpl implements PartService {
     public void seedPart() throws Exception {
         String content = String.join("", Files.readAllLines(Path.of("src/main/resources/jsons/parts.json")));
 
-        Parts[] parts = this.gson.fromJson(content, Parts[].class);
+        PartSeedDto[] partSeedDtos = this.gson.fromJson(content, PartSeedDto[].class);
 
-        for (Parts part : parts) {
-            Parts map = this.modelMapper.map(part, Parts.class);
-            System.out.println();
+        for (PartSeedDto partSeedDto : partSeedDtos) {
+            Parts map = this.modelMapper.map(partSeedDto, Parts.class);
             map.setSuppliers(getRandom());
             this.partRepository.saveAndFlush(map);
         }
+
     }
 
     private Suppliers getRandom() throws Exception {

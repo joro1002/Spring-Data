@@ -8,7 +8,6 @@ import java.util.Set;
 public class Suppliers extends BaseEntity{
   private String name;
   private boolean isImporter;
-  private Set<Parts> parts;
 
     public Suppliers() {
     }
@@ -35,13 +34,5 @@ public class Suppliers extends BaseEntity{
         isImporter = importer;
     }
 
-    @OneToMany(mappedBy = "suppliers")
-    public Set<Parts> getParts() {
-        return parts;
-    }
-
-    public void setParts(Set<Parts> parts) {
-        this.parts = parts;
-    }
 
 }
