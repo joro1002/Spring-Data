@@ -1,4 +1,4 @@
-package softuni.jsonprocessing.services;
+package com.example.xmlprocessing.services;
 
 import java.io.IOException;
 

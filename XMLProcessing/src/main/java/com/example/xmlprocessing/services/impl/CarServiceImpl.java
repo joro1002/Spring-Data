@@ -1,17 +1,13 @@
-package softuni.jsonprocessing.services.impl;
+package com.example.xmlprocessing.services.impl;
 
+import com.example.xmlprocessing.entities.Parts;
+import com.example.xmlprocessing.repositories.CarRepository;
+import com.example.xmlprocessing.repositories.PartRepository;
+import com.example.xmlprocessing.services.CarService;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.jsonprocessing.dtos.CarSeedDto;
-import softuni.jsonprocessing.dtos.CarsWithPartsViewDto;
-import softuni.jsonprocessing.dtos.MakeToyotaDto;
-import softuni.jsonprocessing.dtos.PartsViewDto;
-import softuni.jsonprocessing.entities.Cars;
-import softuni.jsonprocessing.entities.Parts;
-import softuni.jsonprocessing.repositories.CarRepository;
-import softuni.jsonprocessing.repositories.PartRepository;
-import softuni.jsonprocessing.services.CarService;
+
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -36,47 +32,17 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void seedCars() throws Exception {
-        String content = String.join("", Files.readAllLines(Path.of("src/main/resources/jsons/cars.json")));
 
-        CarSeedDto[] carSeedDtos = this.gson.fromJson(content, CarSeedDto[].class);
-
-        for (CarSeedDto carSeedDto : carSeedDtos) {
-            Cars map = this.modelMapper.map(carSeedDto, Cars.class);
-            map.setParts(getRandomParts());
-            this.carRepository.saveAndFlush(map);
-        }
     }
 
     @Override
     public String printMakeToyota() {
-        Set<Cars> toyota = this.carRepository.findAllByMakeOrderByModelAscTravelledDistanceDesc("Toyota");
-
-        List<MakeToyotaDto> allToyota = new ArrayList<>();
-
-        for (Cars car : toyota) {
-            MakeToyotaDto map = this.modelMapper.map(car, MakeToyotaDto.class);
-            allToyota.add(map);
-        }
-        return this.gson.toJson(allToyota);
+       return "f";
     }
 
     @Override
     public String findAllCarsWithParts() {
-        Set<Cars> allBy = this.carRepository.findAllBy();
-
-        List<CarsWithPartsViewDto> result = new ArrayList<>();
-
-        for (Cars car : allBy) {
-            CarsWithPartsViewDto map = this.modelMapper.map(car, CarsWithPartsViewDto.class);
-
-            Set<PartsViewDto> partsViewDtos = new HashSet<>();
-            for (Parts part : car.getParts()) {
-                partsViewDtos.add(this.modelMapper.map(part, PartsViewDto.class));
-            }
-            map.setParts(partsViewDtos);
-            result.add(map);
-        }
-        return this.gson.toJson(result);
+     return "df";
     }
 
 

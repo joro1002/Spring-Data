@@ -1,9 +1,9 @@
-package softuni.jsonprocessing.repositories;
+package com.example.xmlprocessing.repositories;
 
+import com.example.xmlprocessing.entities.Customers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import softuni.jsonprocessing.entities.Customers;
 
 import java.util.Set;
 

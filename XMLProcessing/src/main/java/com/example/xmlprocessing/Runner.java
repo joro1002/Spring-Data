@@ -1,9 +1,10 @@
-package softuni.jsonprocessing;
+package com.example.xmlprocessing;
 
+import com.example.xmlprocessing.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import softuni.jsonprocessing.services.*;
+
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -33,6 +34,6 @@ public class Runner implements CommandLineRunner {
        // System.out.println(this.carService.printMakeToyota());
         //System.out.println(this.supplierService.findAllImporterFalse());
        // System.out.println(this.carService.findAllCarsWithParts());
-        System.out.println(this.customerService.findAllCustomerWithMoreOneSale());
+       // System.out.println(this.customerService.findAllCustomerWithMoreOneSale());
     }
 }

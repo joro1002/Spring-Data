@@ -1,14 +1,13 @@
-package softuni.jsonprocessing.services.impl;
+package com.example.xmlprocessing.services.impl;
 
+import com.example.xmlprocessing.entities.Suppliers;
+import com.example.xmlprocessing.repositories.PartRepository;
+import com.example.xmlprocessing.repositories.SupplierRepository;
+import com.example.xmlprocessing.services.PartService;
 import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import softuni.jsonprocessing.dtos.PartSeedDto;
-import softuni.jsonprocessing.entities.Parts;
-import softuni.jsonprocessing.entities.Suppliers;
-import softuni.jsonprocessing.repositories.PartRepository;
-import softuni.jsonprocessing.repositories.SupplierRepository;
-import softuni.jsonprocessing.services.PartService;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,15 +30,6 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public void seedPart() throws Exception {
-        String content = String.join("", Files.readAllLines(Path.of("src/main/resources/jsons/parts.json")));
-
-        PartSeedDto[] partSeedDtos = this.gson.fromJson(content, PartSeedDto[].class);
-
-        for (PartSeedDto partSeedDto : partSeedDtos) {
-            Parts map = this.modelMapper.map(partSeedDto, Parts.class);
-            map.setSuppliers(getRandom());
-            this.partRepository.saveAndFlush(map);
-        }
 
     }
 

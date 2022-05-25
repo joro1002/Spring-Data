@@ -1,4 +1,4 @@
-package softuni.jsonprocessing.entities;
+package com.example.xmlprocessing.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
