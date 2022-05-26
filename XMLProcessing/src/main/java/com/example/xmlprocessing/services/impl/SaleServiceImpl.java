@@ -2,6 +2,7 @@ package com.example.xmlprocessing.services.impl;
 
 import com.example.xmlprocessing.entities.Cars;
 import com.example.xmlprocessing.entities.Customers;
+import com.example.xmlprocessing.entities.Sales;
 import com.example.xmlprocessing.repositories.CarRepository;
 import com.example.xmlprocessing.repositories.CustomerRepository;
 import com.example.xmlprocessing.repositories.SaleRepository;
@@ -25,8 +26,24 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public void seedSale() {
+        Sales sale = new Sales();
+        sale.setCar(getRandomCar());
+        sale.setCustomer(getRandomCustomer());
+        sale.setDiscount(5);
 
+        Sales sale1 = new Sales();
+        sale1.setCar(getRandomCar());
+        sale1.setCustomer(getRandomCustomer());
+        sale1.setDiscount(10);
 
+        Sales sale2 = new Sales();
+        sale2.setCar(getRandomCar());
+        sale2.setCustomer(getRandomCustomer());
+        sale2.setDiscount(15);
+
+        this.saleRepository.saveAndFlush(sale);
+        this.saleRepository.saveAndFlush(sale1);
+        this.saleRepository.saveAndFlush(sale2);
     }
 
     private Customers getRandomCustomer() {
