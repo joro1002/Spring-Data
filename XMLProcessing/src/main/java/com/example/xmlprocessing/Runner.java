@@ -26,14 +26,9 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        supplierService.seedSupplier();
-//        partService.seedPart();
-//        this.carService.seedCars();
-        //this.customerService.seedCustomer();
-       // this.saleService.seedSale();
-       // System.out.println(this.carService.printMakeToyota());
-        //System.out.println(this.supplierService.findAllImporterFalse());
-       // System.out.println(this.carService.findAllCarsWithParts());
-       // System.out.println(this.customerService.findAllCustomerWithMoreOneSale());
+       // this.supplierService.seedSupplier();
+       // this.partService.seedPart();
+      //  this.carService.seedCars();
+        this.customerService.seedCustomer();
     }
 }

@@ -1,18 +1,18 @@
 package com.example.xmlprocessing.services.impl;
 
+import com.example.xmlprocessing.dtos.CarImportDto;
+import com.example.xmlprocessing.dtos.CarImportRootDto;
+import com.example.xmlprocessing.entities.Cars;
 import com.example.xmlprocessing.entities.Parts;
 import com.example.xmlprocessing.repositories.CarRepository;
 import com.example.xmlprocessing.repositories.PartRepository;
 import com.example.xmlprocessing.services.CarService;
-import com.google.gson.Gson;
+import com.example.xmlprocessing.utils.XmlParser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 @Service
@@ -21,18 +21,23 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
     private final PartRepository partRepository;
     private final ModelMapper modelMapper;
-    private final Gson gson;
 
-    public CarServiceImpl(CarRepository carRepository, PartRepository partRepository, ModelMapper modelMapper, Gson gson) {
+    private final XmlParser xmlParser;
+    public CarServiceImpl(CarRepository carRepository, PartRepository partRepository, ModelMapper modelMapper, XmlParser xmlParser) {
         this.carRepository = carRepository;
         this.partRepository = partRepository;
         this.modelMapper = modelMapper;
-        this.gson = gson;
+        this.xmlParser = xmlParser;
     }
 
     @Override
     public void seedCars() throws Exception {
-
+        CarImportRootDto carImportRootDto = this.xmlParser.parseXml(CarImportRootDto.class, "src/main/resources/XMLs/cars.xml");
+        for (CarImportDto car : carImportRootDto.getCars()) {
+            Cars map = this.modelMapper.map(car, Cars.class);
+            map.setParts(getRandomParts());
+            this.carRepository.saveAndFlush(map);
+        }
     }
 
     @Override
