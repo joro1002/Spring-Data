@@ -11,4 +11,7 @@ import java.util.Set;
 public interface CustomerRepository extends JpaRepository<Customers, Long> {
     @Query("SELECT c FROM Customers c WHERE c.sales.size > 0")
     Set<Customers> findAllCustomerWithMoreThanOneSale();
+
+    @Query("SELECT c FROM Customers c ORDER BY c.birthDate, c.youngDriver DESC")
+    Set<Customers> findAllAndSort();
 }

@@ -2,6 +2,7 @@ package com.example.xmlprocessing.services.impl;
 
 import com.example.xmlprocessing.dtos.CarImportDto;
 import com.example.xmlprocessing.dtos.CarImportRootDto;
+import com.example.xmlprocessing.dtos.export.*;
 import com.example.xmlprocessing.entities.Cars;
 import com.example.xmlprocessing.entities.Parts;
 import com.example.xmlprocessing.repositories.CarRepository;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import javax.xml.bind.JAXBException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,6 +51,42 @@ public class CarServiceImpl implements CarService {
     @Override
     public String findAllCarsWithParts() {
      return "df";
+    }
+
+    @Override
+    public void makeToyota() throws JAXBException {
+        List<CarMakeToyotaExportDto> toyota = this.carRepository.findAllByMakeOrderByModelAscTravelledDistanceDesc("Toyota")
+                .stream()
+                .map(c -> this.modelMapper.map(c, CarMakeToyotaExportDto.class)).toList();
+
+        CarMakeModelExportRootDto carMakeModelExportRootDto = new CarMakeModelExportRootDto();
+        carMakeModelExportRootDto.setCars(toyota);
+
+        this.xmlParser.exportXml(carMakeModelExportRootDto, CarMakeModelExportRootDto.class, "src/main/resources/XMLs/export/make-Toyota.xml");
+    }
+
+    @Override
+    public void carsAndParts() throws JAXBException {
+        List<Cars> all = this.carRepository.findAll();
+        CarExportRootDto carRootDto = new CarExportRootDto();
+        List<CarExportDto> carExportDtos = new ArrayList<>();
+
+        for (Cars car : all) {
+            CarExportDto carExportDto = this.modelMapper.map(car, CarExportDto.class);
+
+            PartExportRootDto partRootDto = new PartExportRootDto();
+            List<PartExportDto> partExportDtos = new ArrayList<>();
+
+            for (Parts part : car.getParts()) {
+                PartExportDto partDto = this.modelMapper.map(part, PartExportDto.class);
+                partExportDtos.add(partDto);
+            }
+            partRootDto.setParts(partExportDtos);
+            carExportDto.setParts(partRootDto);
+            carExportDtos.add(carExportDto);
+        }
+        carRootDto.setCars(carExportDtos);
+        this.xmlParser.exportXml(carRootDto, CarExportRootDto.class, "src/main/resources/XMLs/export/cars-and-parts.xml");
     }
 
 

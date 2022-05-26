@@ -31,5 +31,8 @@ public class Runner implements CommandLineRunner {
       //  this.carService.seedCars();
         //this.customerService.seedCustomer();
         //this.saleService.seedSale();
+        //this.customerService.exportOrdered();
+        //this.carService.makeToyota();
+        this.carService.carsAndParts();
     }
 }

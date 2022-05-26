@@ -11,4 +11,5 @@ public interface CarRepository extends JpaRepository<Cars, Long> {
     Set<Cars> findAllByMakeOrderByModelAscTravelledDistanceDesc(String make);
 
     Set<Cars> findAllBy();
+
 }

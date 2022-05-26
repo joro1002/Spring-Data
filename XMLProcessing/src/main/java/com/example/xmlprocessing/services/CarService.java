@@ -1,5 +1,6 @@
 package com.example.xmlprocessing.services;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public interface CarService {
@@ -7,4 +8,6 @@ public interface CarService {
     String printMakeToyota();
 
     String findAllCarsWithParts();
+    void makeToyota() throws JAXBException;
+    void carsAndParts() throws JAXBException;
 }
