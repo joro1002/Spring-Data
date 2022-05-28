@@ -1,7 +1,6 @@
 package softuni.exam.service.impl;
 
 import com.google.gson.Gson;
-import com.zaxxer.hikari.util.SuspendResumeLock;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.exam.models.dto.CitySeedDto;
@@ -64,5 +63,10 @@ public class CityServiceImpl implements CityService {
             }
         }
         return builder.toString();
+    }
+
+    @Override
+    public City findById(int city) {
+        return this.cityRepository.findById(city).orElse(null);
     }
 }

@@ -1,5 +1,7 @@
 package softuni.exam.service;
 
+import softuni.exam.models.entity.City;
+
 import java.io.IOException;
 
 // TODO: Implement all methods
@@ -10,4 +12,5 @@ public interface CityService {
     String readCitiesFileContent() throws IOException;
 	
 	String importCities() throws IOException;
+    City findById(int city);
 }
