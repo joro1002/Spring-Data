@@ -1,5 +1,7 @@
 package exam.model;
 
+import org.thymeleaf.standard.expression.Each;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -33,7 +35,8 @@ public class Town extends BaseEntity{
         this.population = population;
     }
 
-    @Column(name = "travel_guide")
+    @Lob
+    @Column(name = "travel_guide", length = 512)
     public String getTravelGuide() {
         return travelGuide;
     }
@@ -42,7 +45,7 @@ public class Town extends BaseEntity{
         this.travelGuide = travelGuide;
     }
 
-    @OneToMany(mappedBy = "town")
+    @OneToMany(mappedBy = "town", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Shop> getShops() {
         return shops;
     }
@@ -51,7 +54,7 @@ public class Town extends BaseEntity{
         this.shops = shops;
     }
 
-    @OneToMany(mappedBy = "town")
+    @OneToMany(mappedBy = "town", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Customer> getCustomers() {
         return customers;
     }

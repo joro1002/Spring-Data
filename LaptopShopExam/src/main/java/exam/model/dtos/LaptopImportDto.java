@@ -1,24 +1,36 @@
-package exam.model;
+package exam.model.dtos;
 
-import javax.persistence.*;
+import com.google.gson.annotations.Expose;
+import exam.model.WarrantyType;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "laptops")
-public class Laptop extends BaseEntity {
+public class LaptopImportDto {
+    @Expose
     private String macAddress;
+    @Expose
     private double cpuSpeed;
+    @Expose
     private int ram;
+    @Expose
     private int storage;
+    @Expose
     private String description;
+    @Expose
     private BigDecimal price;
-    private WarrantyType warrantyType;
-    private Shop shop;
+    @Expose
+    private String warrantyType;
+    @Expose
 
-    public Laptop() {
+    private ShopLaptopImportDto shop;
+
+    public LaptopImportDto() {
     }
 
-    @Column(name = "mac_address", unique = true)
+    @Length(min = 9)
     public String getMacAddress() {
         return macAddress;
     }
@@ -26,8 +38,8 @@ public class Laptop extends BaseEntity {
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
     }
+    @Min(value = 0)
 
-    @Column(name = "cpu_speed")
     public double getCpuSpeed() {
         return cpuSpeed;
     }
@@ -36,7 +48,8 @@ public class Laptop extends BaseEntity {
         this.cpuSpeed = cpuSpeed;
     }
 
-    @Column
+    @Min(value = 8)
+    @Max(value = 128)
     public int getRam() {
         return ram;
     }
@@ -45,7 +58,8 @@ public class Laptop extends BaseEntity {
         this.ram = ram;
     }
 
-    @Column
+    @Min(value = 128)
+    @Max(value = 1024)
     public int getStorage() {
         return storage;
     }
@@ -54,8 +68,7 @@ public class Laptop extends BaseEntity {
         this.storage = storage;
     }
 
-    @Lob
-    @Column(length = 512)
+    @Length(min = 10)
     public String getDescription() {
         return description;
     }
@@ -63,8 +76,8 @@ public class Laptop extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+    @Min(value = 0)
 
-    @Column
     public BigDecimal getPrice() {
         return price;
     }
@@ -73,22 +86,11 @@ public class Laptop extends BaseEntity {
         this.price = price;
     }
 
-    @Column(name = "warranty_type")
-    public WarrantyType getWarrantyType() {
+    public String getWarrantyType() {
         return warrantyType;
     }
 
-    public void setWarrantyType(WarrantyType warrantyType) {
+    public void setWarrantyType(String warrantyType) {
         this.warrantyType = warrantyType;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "shop_id")
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
     }
 }

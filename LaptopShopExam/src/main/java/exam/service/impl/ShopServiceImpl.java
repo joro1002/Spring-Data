@@ -9,6 +9,7 @@ import exam.service.ShopService;
 import exam.util.ValidationUtil;
 import exam.util.XmlParser;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
@@ -26,6 +27,7 @@ public class ShopServiceImpl implements ShopService {
     private final XmlParser xmlParser;
     private final TownRepository townRepository;
 
+    @Autowired
     public ShopServiceImpl(ShopRepository shopRepository, ModelMapper modelMapper, ValidationUtil validationUtil, XmlParser xmlParser, TownRepository townRepository) {
         this.shopRepository = shopRepository;
         this.modelMapper = modelMapper;

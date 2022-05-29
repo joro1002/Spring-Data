@@ -7,6 +7,7 @@ import exam.repository.CustomerRepository;
 import exam.service.CustomerService;
 import exam.util.ValidationUtil;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final Gson gson;
     private final ValidationUtil validationUtil;
 
+    @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository, ModelMapper modelMapper, Gson gson, ValidationUtil validationUtil) {
         this.customerRepository = customerRepository;
         this.modelMapper = modelMapper;
@@ -46,8 +48,8 @@ public class CustomerServiceImpl implements CustomerService {
         for (CustomerImportDto customerImportDto : customerImportDtos) {
             if (this.validationUtil.isValid(customerImportDto)) {
                 Customer map = this.modelMapper.map(customerImportDto, Customer.class);
-                this.customerRepository.saveAndFlush(map);
 
+                this.customerRepository.saveAndFlush(map);
                 builder.append(String.format("Successfully imported Customer %s %s - %s", map.getFirstName(), map.getLastName(), map.getEmail()))
                         .append(System.lineSeparator());
             }else {

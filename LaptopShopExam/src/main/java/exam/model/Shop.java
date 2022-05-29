@@ -1,6 +1,7 @@
 package exam.model;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.thymeleaf.standard.expression.Each;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -75,7 +76,7 @@ public class Shop extends BaseEntity{
         this.town = town;
     }
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Laptop> getLaptops() {
         return laptops;
     }

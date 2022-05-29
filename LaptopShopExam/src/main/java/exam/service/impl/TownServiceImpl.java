@@ -8,6 +8,7 @@ import exam.service.TownService;
 import exam.util.ValidationUtil;
 import exam.util.XmlParser;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
@@ -24,6 +25,7 @@ public class TownServiceImpl implements TownService {
     private final ValidationUtil validationUtil;
     private final XmlParser xmlParser;
 
+    @Autowired
     public TownServiceImpl(TownRepository townRepository, ModelMapper modelMapper, ValidationUtil validationUtil, XmlParser xmlParser) {
         this.townRepository = townRepository;
         this.modelMapper = modelMapper;

@@ -15,8 +15,6 @@ public class CustomerImportDto {
     private String email;
     @Expose
     private LocalDate registeredOn;
-    @Expose
-    private TownImportDto town;
 
     public CustomerImportDto() {
     }
@@ -56,11 +54,4 @@ public class CustomerImportDto {
         this.registeredOn = registeredOn;
     }
 
-    public TownImportDto getTown() {
-        return town;
-    }
-
-    public void setTown(TownImportDto town) {
-        this.town = town;
-    }
 }
