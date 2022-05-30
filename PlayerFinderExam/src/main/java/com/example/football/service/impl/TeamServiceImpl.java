@@ -62,4 +62,9 @@ public class TeamServiceImpl implements TeamService {
         }
         return builder.toString();
     }
+
+    @Override
+    public Team getByName(String name) {
+        return this.teamRepository.findFirstByName(name);
+    }
 }

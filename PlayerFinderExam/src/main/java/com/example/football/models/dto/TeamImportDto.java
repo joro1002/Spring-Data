@@ -62,6 +62,7 @@ public class TeamImportDto {
         this.history = history;
     }
 
+    @NotNull
     public String getTownName() {
         return townName;
     }
