@@ -14,5 +14,4 @@ public interface PlayerRepository  extends JpaRepository<Player, Integer> {
     @Query("SELECT p FROM Player p WHERE p.birthDate > :after AND p.birthDate < :before ORDER BY p.stat.shooting DESC," +
             "p.stat.passing desc, p.stat.endurance DESC, p.lastName asc")
     Set<Player> bestPlayers(@Param("after")LocalDate after, @Param("before")LocalDate before);
-
 }
